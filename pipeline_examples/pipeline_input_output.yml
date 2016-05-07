@@ -1,0 +1,22 @@
+jobs:
+- name: job-generate-and-pass-file
+  public: true
+  plan:
+  - task: generate-file
+    config:
+      platform: linux
+      image: docker:///debian
+      outputs:
+      - name: generate_file_output
+      run:
+        path: touch
+        args: [generate_file_output/file.txt]
+  - task: show-file
+    config:
+      platform: linux
+      image: docker:///debian
+      inputs:
+      - name: generate_file_output
+      run:
+        path: ls
+        args: ["-altr", "generate_file_output"]

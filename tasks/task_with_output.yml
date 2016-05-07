@@ -1,0 +1,11 @@
+---
+platform: linux
+
+image: docker:///debian
+
+outputs:
+- name: task_output
+
+run:
+  path: ls
+  args: ['-altr']

@@ -1,0 +1,8 @@
+---
+platform: linux
+
+image: docker:///debian
+
+run:
+  path: echo
+  args: [hello world]

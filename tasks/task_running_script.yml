@@ -1,0 +1,10 @@
+---
+platform: linux
+
+image: docker:///debian
+
+inputs:
+- name: task_input
+
+run:
+  path: ./task_input/script.sh

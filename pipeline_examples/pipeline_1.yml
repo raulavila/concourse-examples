@@ -1,0 +1,18 @@
+jobs:
+- name: job-hello-and-goodbye
+  public: true
+  plan:
+  - task: hello-world
+    config:
+      platform: linux
+      image: docker:///debian
+      run:
+        path: echo
+        args: [hello world]
+  - task: goodbye
+    config:
+      platform: linux
+      image: docker:///debian
+      run:
+        path: echo
+        args: [goodbye]

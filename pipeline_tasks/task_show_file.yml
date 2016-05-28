@@ -3,8 +3,8 @@ platform: linux
 image: docker:///debian
 
 inputs:
+- name: pipeline-code
 - name: generate_file_output
 
 run:
-  path: ls
-  args: ["-altr", "generate_file_output"]
+  path: pipeline-code/pipeline_scripts/list_files.sh

@@ -1,0 +1,31 @@
+---
+resources:
+- name: pipeline-code
+  type: git
+  source:
+    uri: https://github.com/raulavila/concourse-examples.git
+- name: every-30m
+  type: time
+  source:
+    interval: 30m
+
+jobs:
+- name: job-generate-and-pass-file
+  public: true
+  plan:
+  - get: pipeline-code
+    trigger: true
+  - get: every-30m
+    trigger: true
+  - task: generate-file
+    file: pipeline-code/pipeline_tasks/task_generate_file.yml
+  - task: show-file
+    file: pipeline-code/pipeline_tasks/task_show_file.yml
+- name: job-confirm-previous-is-done
+  public: true
+  plan:
+  - get: pipeline-code
+    trigger: true
+    passed: [job-generate-and-pass-file]
+  - task: say-done
+    file: pipeline-code/pipeline_tasks/task_say_done.yml

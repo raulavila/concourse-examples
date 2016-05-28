@@ -1,0 +1,16 @@
+---
+resources:
+- name: pipeline-code
+  type: git
+  source:
+    uri: https://github.com/raulavila/concourse-examples.git
+
+jobs:
+- name: job-generate-and-pass-file
+  public: true
+  plan:
+  - get: pipeline-code
+  - task: generate-file
+    file: pipeline-code/pipeline_tasks/task_generate_file.yml
+  - task: show-file
+    file: pipeline-code/pipeline_tasks/task_show_file.yml

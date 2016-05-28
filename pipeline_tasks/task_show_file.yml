@@ -1,0 +1,10 @@
+---
+platform: linux
+image: docker:///debian
+
+inputs:
+- name: generate_file_output
+
+run:
+  path: ls
+  args: ["-altr", "generate_file_output"]

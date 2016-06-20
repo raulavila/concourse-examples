@@ -38,6 +38,7 @@ jobs:
   public: true
   plan:
   - get: pipeline-code
+  - get: source-code
     trigger: true
     passed: [job-build-and-test]
   - task: package

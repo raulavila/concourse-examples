@@ -41,6 +41,8 @@ jobs:
   - get: source-code
     trigger: true
     passed: [job-build-and-test]
+  - get: every-30m
+    trigger: true    
   - task: package
     file: pipeline-code/pipeline_real/tasks/task_package.yml
     privileged: true

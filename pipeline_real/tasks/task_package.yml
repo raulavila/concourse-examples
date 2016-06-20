@@ -1,0 +1,14 @@
+---
+platform: linux
+image: docker:///maven
+
+inputs:
+- name: pipeline-code
+- name: source-code
+
+outputs:
+- name: cf-deploy-files
+
+run:
+  run:
+    path: pipeline-code/pipeline_real/scripts/package.sh

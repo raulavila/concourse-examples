@@ -1,0 +1,11 @@
+---
+platform: linux
+image: docker:///maven
+
+inputs:
+- name: pipeline-code
+- name: source-code
+
+run:
+  run:
+    path: pipeline-code/pipeline_real/scripts/verify.sh

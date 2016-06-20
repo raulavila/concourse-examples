@@ -1,0 +1,46 @@
+---
+resources:
+- name: pipeline-code
+  type: git
+  source:
+    uri: https://github.com/raulavila/concourse-examples.git
+- name: source-code
+  type: git
+  source:
+    uri: https://github.com/raulavila/spring-boot-hello-world.git
+- name: cloud-foundry
+  type: cf
+  source:
+    api: https://api.run.pivotal.io
+    username: {{cf-email}}
+    password: {{cf-passowrd}}
+    organization: {{cf-org}}
+    space: {{cf-space}}
+    skip_cert_check: false
+- name: every-30m
+  type: time
+  source:
+    interval: 30m
+
+jobs:
+- name: job-build-and-test
+  public: true
+  plan:
+  - get: pipeline-code
+  - get: source-code
+    trigger: true
+  - get: every-30m
+    trigger: true
+  - task: verify
+    file: pipeline_code/pipeline_real/tasks/task_verify.yml
+- name: job-cf-deploy
+  public: true
+  plan:
+  - get: pipeline-code
+    trigger: true
+    passed: [job-build-and-test]
+ - task: package
+   file: pipeline_code/pipeline_real/tasks/task_package.yml
+  - put: cloud-foundry
+    params:
+      manifest: cf-deploy-files/manifest.yml

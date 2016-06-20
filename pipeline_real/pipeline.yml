@@ -33,6 +33,7 @@ jobs:
     trigger: true
   - task: verify
     file: pipeline-code/pipeline_real/tasks/task_verify.yml
+    privileged: true
 - name: job-cf-deploy
   public: true
   plan:
@@ -41,6 +42,7 @@ jobs:
     passed: [job-build-and-test]
   - task: package
     file: pipeline-code/pipeline_real/tasks/task_package.yml
+    privileged: true
   - put: cloud-foundry
     params:
       manifest: cf-deploy-files/manifest.yml

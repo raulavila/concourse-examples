@@ -1,7 +1,6 @@
 ---
 platform: linux
 image: docker:///maven
-privileged: true
 
 inputs:
 - name: pipeline-code

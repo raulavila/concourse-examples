@@ -9,6 +9,6 @@ inputs:
 outputs:
 - name: cf-deploy-files
 
+
 run:
-  run:
-    path: pipeline-code/pipeline_real/scripts/package.sh
+  path: pipeline-code/pipeline_real/scripts/package.sh

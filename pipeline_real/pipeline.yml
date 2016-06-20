@@ -32,15 +32,15 @@ jobs:
   - get: every-30m
     trigger: true
   - task: verify
-    file: pipeline_code/pipeline_real/tasks/task_verify.yml
+    file: pipeline-code/pipeline_real/tasks/task_verify.yml
 - name: job-cf-deploy
   public: true
   plan:
   - get: pipeline-code
     trigger: true
     passed: [job-build-and-test]
- - task: package
-   file: pipeline_code/pipeline_real/tasks/task_package.yml
+  - task: package
+    file: pipeline-code/pipeline_real/tasks/task_package.yml
   - put: cloud-foundry
     params:
       manifest: cf-deploy-files/manifest.yml
